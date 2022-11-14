@@ -11,10 +11,9 @@ func startServer(port int, certs tls.Certificate, trust *x509.CertPool) error {
 	address := fmt.Sprintf(":%d", port)
 	config := tls.Config{
 		Certificates: []tls.Certificate{certs},
-		// ClientAuth:         tls.RequireAndVerifyClientCert,
-		ClientCAs:          trust,
-		MinVersion:         tls.VersionTLS13,
-		InsecureSkipVerify: true,
+		ClientAuth:   tls.RequireAndVerifyClientCert,
+		ClientCAs:    trust,
+		MinVersion:   tls.VersionTLS13,
 	}
 	listener, err := net.Listen("tcp", address)
 	if err != nil {

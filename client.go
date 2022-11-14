@@ -13,11 +13,10 @@ import (
 func startClient(port int, certs tls.Certificate, trust *x509.CertPool, serverName string) error {
 	address := fmt.Sprintf(":%d", port)
 	config := &tls.Config{
-		Certificates:       []tls.Certificate{certs},
-		RootCAs:            trust,
-		MinVersion:         tls.VersionTLS13,
-		ServerName:         serverName,
-		InsecureSkipVerify: true,
+		Certificates: []tls.Certificate{certs},
+		RootCAs:      trust,
+		MinVersion:   tls.VersionTLS13,
+		ServerName:   serverName,
 	}
 	raddr, err := net.ResolveTCPAddr("tcp", address)
 	if err != nil {
